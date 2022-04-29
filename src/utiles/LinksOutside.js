@@ -1,0 +1,2 @@
+export const Forgotten_Lads_path = 'https://oasis.cash/collection/0x62587576142bd5b73F71d6DA51389Fb6b92216AE';
+export const Present_Lads_path = 'https://oasis.cash/collection/0x906f654CF46a564D1C8c70601757b4973A9c30E9'
