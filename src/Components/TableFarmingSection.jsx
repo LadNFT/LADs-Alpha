@@ -20,6 +20,13 @@ function TableFarmingSection() {
     '0x4a9d5084550f69922ea36bff38b3d07e4d3ab420': 0.029,
   }
 
+  let titles = {
+    '0xD58E8D30730A87d4eC907dfAeCa8B8708dD7e69D' : 'LAD$',
+    '0x04978C2634926B6c133E6846B718AC117E10F157' : 'LAD$ - WBCH LP (Mistswap)',
+    '0x48551e0b62642c564054b1ebF4aEB1F8B0675278' : 'LAD$ - WBCH LP (Benswap)',
+    '0xb9C26A60E85F510223B855492afC9336Ae5A98a2' : 'LawUSD - LAD$ LP (Benswap)'
+  }
+
   const { pools,
     poolClaimRewards,
     poolDeposit,
@@ -59,7 +66,7 @@ function TableFarmingSection() {
               <>
                 {/* --first row -- */}
                 <div className='flex flex-col justify-between items-center  py-5 px-3  shadow-sm shadow-black'>
-                  <h3 className='text-2xl font-bold text-secondary text-left mb-3 w-full'>{item.rewardSymbol}</h3>
+                  <h3 className='text-2xl font-bold text-secondary text-left mb-3 w-full'>{titles[item.address]}</h3>
                   <div className='flex justify-between items-center w-full'>
                     <h3 className='text-lg md:text-xl font-normal'> Earned : </h3>
                     <h3 className='text-lg md:text-xl font-normal'> {(+item.rewards).toFixed(2)} {item.rewardSymbol} </h3>
