@@ -361,19 +361,19 @@ export const BlockchainContextProvider = (props) => {
       // Get Staked Token Ids
       const tokenInfo = await stakingContract.depositsOf(currentSignerAddress);
       let tx = await stakingContract
-        .connect(currentSigner)
-        .claimRewards(tokenInfo);
+          .connect(currentSigner)
+          .claimRewards();
       await tx.wait();
       window.location.reload();
     } catch (error) {
       if (
-        error
-          .toString()
-          .includes("execution reverted: You have not staked any NFTs")
+          error
+              .toString()
+              .includes("execution reverted: You have not staked any NFTs")
       ) {
-        setErrorDetails("You have not staked any NFTs");
+        alert("You have not staked any NFTs");
       } else {
-        setErrorDetails(error.data.message);
+        alert(error.data.message);
         console.log(error);
       }
     }
