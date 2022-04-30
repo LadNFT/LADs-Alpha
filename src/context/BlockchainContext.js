@@ -41,6 +41,7 @@ export const BlockchainContextProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [unstakedNfts, setUnstakedNfts] = useState();
   const [stakedNfts, setStakedNfts] = useState();
+  const [currentRate, setCurrentRate] = useState();
   //
   const [unstakedBalance, setUnstakeBalance] = useState();
   const [stakedBalance, setStakeBalance] = useState();
@@ -88,6 +89,7 @@ export const BlockchainContextProvider = (props) => {
         const signerAddress = await getSignerAddress();
         setCurrentSignerAddress(signerAddress);
 
+        await loadNFTInfo(signerAddress);
 
         await fetchPools();
       } else {
@@ -97,6 +99,25 @@ export const BlockchainContextProvider = (props) => {
       console.log(error);
       throw new Error("No Ethereum Object");
     }
+  };
+
+  const loadNFTInfo = async (signerAddress) => {
+    // Fetch Unstaked Nfts
+    const unstakedNfts_fetched = await fetchUnstakedInfo(signerAddress);
+    setUnstakedNfts(unstakedNfts_fetched);
+
+    // Fetch Staked Nfts
+    const stakedNfts_fetched = await fetchStakedInfo(signerAddress);
+    setStakedNfts(stakedNfts_fetched);
+
+    await getUnstakedBalance(signerAddress);
+    await getStakedBalance(signerAddress);
+
+    // Run every 10 seconds
+    setInterval(async () => {
+      await getStakedBalance(signerAddress);
+    }, 15000);
+
   };
 
   const connectWallet = async () => {
@@ -122,6 +143,7 @@ export const BlockchainContextProvider = (props) => {
       const signerAddress = await getSignerAddress();
       setCurrentSignerAddress(signerAddress);
 
+      await loadNFTInfo(signerAddress);
       await fetchPools();
     } catch (error) {
       setErrorDetails(error);
@@ -310,28 +332,21 @@ export const BlockchainContextProvider = (props) => {
       // Get Staking Contract
       const provider = getProvider();
       const stakingContract = new ethers.Contract(
-        StakingContractData.address,
-        StakingContractData.abi,
-        provider
+          StakingContractData.address,
+          StakingContractData.abi,
+          provider
       );
       const tokenInfo = await stakingContract.depositsOf(signerAddress);
       const balance = tokenInfo.length;
       setStakeBalance(balance.toString());
 
+      let rate = await stakingContract.rate();
+      rate = ethers.utils.formatEther(rate) * balance;
+      setCurrentRate(Number(rate).toFixed(5));
+
       // Get Reward Balance
-      let balanceRewards = await stakingContract.calculateRewards(
-        signerAddress,
-        tokenInfo
-      );
-
-      let sum = balanceRewards.reduce(
-        (partialSum, a) => partialSum + parseInt(a),
-        0
-      );
-
-      balanceRewards = ethers.utils.formatEther(sum.toString());
-
-      setRewardTokenBalance(balanceRewards);
+      let balanceRewards = await stakingContract.calculateRewards(signerAddress);
+      setRewardTokenBalance(Number(ethers.utils.formatEther(balanceRewards)).toFixed(4));
     } catch (error) {
       console.log(error);
     }
@@ -409,6 +424,9 @@ export const BlockchainContextProvider = (props) => {
       });
       pool.rewards = 0;
       let signerAddress = await getSignerAddress();
+      await poolContract.isLocked(signerAddress).then((locked) => {
+        pool.locked = locked;
+      });
       await poolContract.calculateRewards(signerAddress).then((rewards) => {
         pool.rewards = ethers.utils.formatEther(rewards.toString());
       });
@@ -513,6 +531,7 @@ export const BlockchainContextProvider = (props) => {
       value={{
         currentSigner,
         currentSignerAddress,
+        currentRate,
         connectWallet,
         unstakedNfts,
         stakedNfts,
