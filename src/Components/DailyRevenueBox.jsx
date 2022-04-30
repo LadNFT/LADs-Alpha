@@ -3,7 +3,7 @@ import demond from '../Assets/demond.png'
 
 function DailyRevenueBox({stakedBalance = 0 , currentRate = 0  , unstakedBalance = 0  , rewardTokenBalance = 0 , stakeHandler , unstakeHandler}) {
   return (
-    <div className='bg-third p-4 rounded-md border-solid border-2 border-gray-700'>
+    <div className='bg-third p-4 rounded-md border-solid border-2 border-gray-700' style={{'maxHeight': '300px'}}>
         <h2 className='text-white font-bold uppercase mb-4'>Daily Revenue</h2>
         <div className='flex justify-between items-center text-white mb-4'>
             <h4>STAKED:</h4>

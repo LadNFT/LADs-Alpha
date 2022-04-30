@@ -10,7 +10,7 @@ function ImagesUnStakingBox({ unstakedNfts,  selectStack , value }) {
         <div className='text-white bg-third py-3 mb-3'>
             <h2 className='text-center font-bold uppercase text-4xl mb-5'>Unstaked NFTs</h2>
             <p></p>
-            <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-16'>
+            <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-16' style={{'maxHeight': '600px', 'overflow': 'scroll'}}>
                 {
                     unstakedNfts &&
                     unstakedNfts.tokenIds.length > 0 &&
