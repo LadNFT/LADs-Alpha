@@ -10,7 +10,7 @@ function ImagesStakingBox({ stakedNfts , selectStack , value }) {
         <div className='text-white bg-third py-3 mb-3'>
             <h2 className='text-center font-bold uppercase text-4xl mb-3'>Staked NFTs</h2>
             <p></p>
-            <div className='grid grid-cols-2 xl:grid-cols-3 gap-2 md:gap-16'>
+            <div className='grid grid-cols-2 xl:grid-cols-3 gap-2 md:gap-16' style={{'maxHeight': '600px', 'overflow': 'scroll'}}>
                 {
                     stakedNfts &&
                     stakedNfts.tokenIds.length > 0 &&

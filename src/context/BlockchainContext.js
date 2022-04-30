@@ -343,7 +343,7 @@ export const BlockchainContextProvider = (props) => {
       setStakeBalance(balance.toString());
 
       let rate = await stakingContract.rate();
-      rate = ethers.utils.formatEther(rate) * balance * 15700;
+      rate = ethers.utils.formatEther(rate) * balance;
       setCurrentRate(Number(rate).toFixed(5));
 
       // Get Reward Balance
