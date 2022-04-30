@@ -14,9 +14,10 @@ function TableFarmingSection() {
   const [rewardsToAdd, setRewardsToAdd] = useState(0);
 
   let dollarValues = {
-    'TLAD$': 0.0355,
-    'TWBCH': 340,
-    'TLADLP': 10,
+    '0xB34cBd2821B4e2F2E1223D08A11258076746F886': 0.029,
+    '0xE21585ac58f3fbC3Cb6BbAaf61c3930d15706165': 0.029,
+    '0x9c3FA61ad642899Bc389ef940363301CCB43cd60': 0.029,
+    '0x4a9d5084550f69922ea36bff38b3d07e4d3ab420': 0.029,
   }
 
   const { pools,
@@ -35,7 +36,7 @@ function TableFarmingSection() {
 
   let getAPR = (item) => {
     var yearBlocks = (365 * 24 * 60 * 60) / 5.5;
-    return Math.round(((item.rate * yearBlocks) * dollarValues[item.rewardSymbol]) / dollarValues[item.stakingSymbol] * 100000) / 1000;
+    return Math.round(((item.rate * yearBlocks) * dollarValues[item.rewardToken]) / dollarValues[item.stakingToken] * 100000) / 1000;
   };
 
   const openDetails = (item) => {
