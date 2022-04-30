@@ -124,8 +124,11 @@ function TableFarmingSection() {
                     </div>
                     <div className="flex justify-center items-center w-full">
                       <Button title="MAX" classProps="ml-5" onClick={() => setWithdrawAmount(item.deposited)} />
-                      <Button title="WITHDRAW" classProps="ml-5" onClick={() => poolWithdraw(item.address, withdrawAmount)} />
+                      {item.locked ? (<button className="ml-5 bg-grey py-2 px-5 rounded-lg text-grey uppercase">WITHDRAW</button>) : (<Button title="WITHDRAW" classProps="ml-5" onClick={() => poolWithdraw(item.address, withdrawAmount)} />)}
                     </div>
+                    {item.locked ? (<div className="flex justify-center items-center w-full">
+                      Locked for {item.lockedLeft} blocks
+                    </div>) : ''}
                   </div>
                 </>
               ) : ''}

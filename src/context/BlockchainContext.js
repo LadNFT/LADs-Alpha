@@ -7,6 +7,8 @@ import TokenABI from "../blockchain/TokenABI";
 
 export const BlockchainContext = createContext();
 
+let lockTime = 219800;
+
 const { ethereum } = window;
 
 const getProvider = () => {
@@ -341,7 +343,7 @@ export const BlockchainContextProvider = (props) => {
       setStakeBalance(balance.toString());
 
       let rate = await stakingContract.rate();
-      rate = ethers.utils.formatEther(rate) * balance;
+      rate = ethers.utils.formatEther(rate) * balance * 15700;
       setCurrentRate(Number(rate).toFixed(5));
 
       // Get Reward Balance
@@ -424,8 +426,15 @@ export const BlockchainContextProvider = (props) => {
       });
       pool.rewards = 0;
       let signerAddress = await getSignerAddress();
-      await poolContract.isLocked(signerAddress).then((locked) => {
+      await poolContract.isLocked(signerAddress).then(async (locked) => {
         pool.locked = locked;
+        if(locked) {
+          await poolContract.locked(signerAddress).then((blocks) => {
+            getProvider().getBlockNumber().then((currentBlock) => {
+              pool.lockedLeft = (((parseInt(blocks.toString())) + lockTime) - (parseInt(currentBlock.toString())));
+            });
+          });
+        }
       });
       await poolContract.calculateRewards(signerAddress).then((rewards) => {
         pool.rewards = ethers.utils.formatEther(rewards.toString());
