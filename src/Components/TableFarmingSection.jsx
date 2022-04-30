@@ -17,7 +17,7 @@ function TableFarmingSection() {
     '0xB34cBd2821B4e2F2E1223D08A11258076746F886': 0.029,
     '0xE21585ac58f3fbC3Cb6BbAaf61c3930d15706165': 0.029,
     '0x9c3FA61ad642899Bc389ef940363301CCB43cd60': 0.029,
-    '0x4a9d5084550f69922ea36bff38b3d07e4d3ab420': 0.029,
+    '0x4a9D5084550f69922eA36BFF38b3d07e4D3Ab420': 0.029,
   }
 
   let titles = {
@@ -124,8 +124,11 @@ function TableFarmingSection() {
                     </div>
                     <div className="flex justify-center items-center w-full">
                       <Button title="MAX" classProps="ml-5" onClick={() => setWithdrawAmount(item.deposited)} />
-                      <Button title="WITHDRAW" classProps="ml-5" onClick={() => poolWithdraw(item.address, withdrawAmount)} />
+                      {item.locked ? (<button className="ml-5 bg-grey py-2 px-5 rounded-lg text-grey uppercase">WITHDRAW</button>) : (<Button title="WITHDRAW" classProps="ml-5" onClick={() => poolWithdraw(item.address, withdrawAmount)} />)}
                     </div>
+                    {item.locked ? (<div className="flex justify-center items-center w-full">
+                      Locked for {item.lockedLeft} blocks
+                    </div>) : ''}
                   </div>
                 </>
               ) : ''}
