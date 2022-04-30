@@ -73,7 +73,7 @@ export const BlockchainContextProvider = (props) => {
 
       // Check Network
       const chainId = await getNetworkChainId();
-      if (chainId !== 10001) {
+      if (chainId !== 10000) {
         return setErrorDetails("Please Change Network to Smart BCH");
       }
 
@@ -109,7 +109,7 @@ export const BlockchainContextProvider = (props) => {
 
       // Check Network
       const chainId = await getNetworkChainId();
-      if (chainId !== 10001) {
+      if (chainId !== 10000) {
         setErrorDetails("Please Change Network to Smart BCH");
         return;
       }
@@ -365,9 +365,10 @@ export const BlockchainContextProvider = (props) => {
   const fetchPools = async () => {
     let _tmpPools = [];
     let poolAddresses = [
-        '0x12b6b2fCe67aeA033E1d824F4B7eC96c3C508Cf4',
-        '0xCE263507eB6CF6112E5305678E8F95B339cD1352',
-        '0x18992972FE6945cAB5916d6062474AAA28159da5'
+        '0xD58E8D30730A87d4eC907dfAeCa8B8708dD7e69D',
+        '0x04978C2634926B6c133E6846B718AC117E10F157',
+        '0x48551e0b62642c564054b1ebF4aEB1F8B0675278',
+        '0xb9C26A60E85F510223B855492afC9336Ae5A98a2'
     ]
 
     for(var addr in poolAddresses) {
