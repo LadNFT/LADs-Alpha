@@ -72,8 +72,8 @@ function TableFarmingSection() {
                     <h3 className='text-lg md:text-xl font-normal'> {(+item.rewards).toFixed(2)} {item.rewardSymbol} </h3>
                   </div>
                   <div className='flex justify-between items-center w-full'>
-                    <h3 className='text-lg md:text-xl font-normal'>  My Staked Tokens : </h3>
-                    <h3 className='text-lg md:text-xl font-normal'> {item.deposited} {item.stakingSymbol}</h3>
+                    <h3 className='text-lg md:text-xl font-normal'> My tokens : </h3>
+                    <h3 className='text-lg md:text-xl font-normal'> {(+item.deposited).toFixed(2)} {item.stakingSymbol}</h3>
                   </div>
                   <div className='flex justify-between items-center w-full'>
                     <h3 className='text-lg md:text-xl font-normal'>  APR : </h3>
