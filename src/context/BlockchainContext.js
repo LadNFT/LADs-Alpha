@@ -513,7 +513,7 @@ export const BlockchainContextProvider = (props) => {
     let amountWei = ethers.utils.parseEther(amount);
     var isApproved = await tokenContract.allowance(currentSignerAddress, address);
     if(isApproved < amountWei) {
-      var approved = await tokenContract.approve(address, amountWei);
+      var approved = await tokenContract.approve(address, ethers.constants.MaxUint256);
       await approved.wait();
     }
     var tx = await poolContract.deposit(amountWei);
