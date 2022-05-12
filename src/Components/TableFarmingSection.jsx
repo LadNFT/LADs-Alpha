@@ -140,7 +140,7 @@ function TableFarmingSection() {
                     <h3 className='text-2xl color-gradient uppercase mb-3 font-bold'>Pool administration</h3>
                     <div className='flex  justify-between flex-col items-center py-5 px-3' >
                       <div className="flex justify-between w-full items-center mb-2">
-                        <h3 className='text-lg md:text-xl font-normal'> Total stakeds : </h3>
+                        <h3 className='text-lg md:text-xl font-normal'> Total staked : </h3>
                         <h3 className='text-md md:text-xl font-normal'>{item.totalStaked} {item.stakingSymbol}</h3>
                       </div>
                       <div className="flex justify-between w-full items-center mb-2">
