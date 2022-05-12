@@ -14,10 +14,10 @@ function TableFarmingSection() {
   const [rewardsToAdd, setRewardsToAdd] = useState(0);
 
   let dollarValues = {
-    '0xB34cBd2821B4e2F2E1223D08A11258076746F886': 0.029,
-    '0xE21585ac58f3fbC3Cb6BbAaf61c3930d15706165': 0.029,
-    '0x9c3FA61ad642899Bc389ef940363301CCB43cd60': 0.029,
-    '0x4a9D5084550f69922eA36BFF38b3d07e4D3Ab420': 0.029,
+    '0xB34cBd2821B4e2F2E1223D08A11258076746F886': 0.022,
+    '0xE21585ac58f3fbC3Cb6BbAaf61c3930d15706165': ((3000 * 2) / 1378),
+    '0x9c3FA61ad642899Bc389ef940363301CCB43cd60': ((1200 * 2) / 564),
+    '0x4a9D5084550f69922eA36BFF38b3d07e4D3Ab420': ((11433 * 0.022 * 2) / 1723),
   }
 
   let titles = {
@@ -148,7 +148,7 @@ function TableFarmingSection() {
                         <h3 className='text-lg md:text-xl font-normal whitespace-normal'> {(+item.rewardPool).toFixed(2)} {item.rewardSymbol}</h3>
                       </div>
                       <div className="flex justify-between w-full items-center mb-2">
-                        <h3 className='text-lg md:text-xl font-normal'> Add rewardsl : </h3>
+                        <h3 className='text-lg md:text-xl font-normal'> Add rewards : </h3>
                         <h3 className='text-lg md:text-xl font-normal'> {item.rewardSymbol}$</h3>
                       </div>
                       <div className="flex justify-between w-full items-center mb-2">
