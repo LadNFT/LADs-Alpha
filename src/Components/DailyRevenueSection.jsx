@@ -48,19 +48,12 @@ const DailyRevenueSection = (props) => {
     }
   };
 
-
-
-  const selectStack = (i, tokenId) => {
-    setValue(i);
-    imageHandler(tokenId)
-  }
-
   return (
     <section className="section">
       <div className="container">
         {/* Unstaked */}
         {unstakedNfts && unstakedNfts.tokenIds.length > 0 ? (
-          <ImagesUnStakingBox unstakedNfts={unstakedNfts} value={value} selectStack={selectStack} />
+          <ImagesUnStakingBox unstakedNfts={unstakedNfts} selectedImages={selectedImages} selectStack={imageHandler} />
         ) : (
           <div>
             <TitleSlacking
@@ -73,7 +66,7 @@ const DailyRevenueSection = (props) => {
         {/* Staked */}
         {stakedNfts && stakedNfts.tokenIds.length > 0 ? (
           <div className="grid-system">
-            <ImagesStakingBox stakedNfts={stakedNfts} value={value} selectStack={selectStack} />
+            <ImagesStakingBox stakedNfts={stakedNfts} selectedImages={selectedImages} selectStack={imageHandler} />
             <DailyRevenueBox
               stakedBalance={stakedBalance}
               currentRate={currentRate}

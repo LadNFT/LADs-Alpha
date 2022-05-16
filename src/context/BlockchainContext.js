@@ -259,7 +259,7 @@ export const BlockchainContextProvider = (props) => {
 
     const balance = tokenInfo.length;
 
-    for (var a = 0; a < balance; a++) {
+    for (let a = 0; a < balance; a++) {
       const image =
         "https://lads.mypinata.cloud/ipfs/QmeStiUNVMRe4db6qeoEeaXR8CDKxprLUqdW9CoUAxoV54/" +
         tokenInfo[a] +
@@ -281,13 +281,15 @@ export const BlockchainContextProvider = (props) => {
     // Get Staking Contract
     const stakingContract = await getStakingContract();
     try {
-      // Set Approval for all tokens
 
-      let txx = await apeContract
-        .connect(currentSigner)
-        .setApprovalForAll(stakingContract.address, true);
-
-      await txx.wait();
+      let isApproved = await apeContract.isApprovedForAll(currentSignerAddress, StakingContractData.address);
+      if(!isApproved) {
+        // Set Approval for all tokens
+        let txx = await apeContract
+            .connect(currentSigner)
+            .setApprovalForAll(stakingContract.address, true);
+        await txx.wait();
+      }
 
       // Set Stake
       let tx = await stakingContract.connect(currentSigner).deposit(_tokenIds);
