@@ -4,8 +4,7 @@ import p3 from '../Assets/p3.png';
 
   const name2 = "Staked";
 
-function ImagesStakingBox({ stakedNfts , selectStack , value }) {
-
+function ImagesStakingBox({ stakedNfts , selectStack , selectedImages }) {
     return (
         <div className='text-white bg-third py-3 mb-3'>
             <h2 className='text-center font-bold uppercase text-4xl mb-3'>Staked NFTs</h2>
@@ -15,7 +14,8 @@ function ImagesStakingBox({ stakedNfts , selectStack , value }) {
                     stakedNfts &&
                     stakedNfts.tokenIds.length > 0 &&
                     stakedNfts?.tokenIds.map((tokenId, i) => (
-                        <button className={`flex justify-center items-center flex-col border-solid border-2 border-gray-700 rounded-md md:py-4 ${value === i ? 'border-red-400' : ''}`} key={i} onClick={() => selectStack(i , tokenId)}>
+                        <button className={`flex justify-center items-center flex-col border-solid border-2 border-gray-700 rounded-md md:py-4 ${selectedImages.includes(tokenId) ? 'border-red-400' : ''}`}
+                                key={i} onClick={() => selectStack(tokenId)}>
                             <img src={stakedNfts.metadatas[i]} alt="" className='md:w-1/2 mb-3' />
                             <h4 className='mb-3' >Token ID {tokenId}</h4>
                             <h5 className='mb-3' > {name2.toUpperCase()}</h5>
