@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { ethers } from "ethers";
+import {BigNumber, ethers} from "ethers";
 import ApeContractData from "../blockchain/ApeContract";
 import StakingContractData from "../blockchain/StakingContract";
 import PoolContractData from "../blockchain/PoolContract";
@@ -510,9 +510,10 @@ export const BlockchainContextProvider = (props) => {
         currentSigner
     );
     let amountWei = ethers.utils.parseEther(amount);
-    var isApproved = await tokenContract.allowance(currentSignerAddress, address);
-    let approvedEther = ethers.utils.formatEther(isApproved);
-    if(approvedEther === 0) {
+    var allowance = await tokenContract.allowance(currentSignerAddress, address);
+    let newAmount = BigNumber.from(amountWei);
+    let approvedEther = BigNumber.from(allowance);
+    if(approvedEther.lt(newAmount)) {
       var approved = await tokenContract.approve(address, ethers.constants.MaxUint256);
       await approved.wait();
     }
