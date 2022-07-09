@@ -229,7 +229,7 @@ export const BlockchainContextProvider = (props) => {
     for (let a1 = 0; a1 < tokens.length; a1++) {
       const tokenId = tokens[a1];
       const image =
-        "https://lads.mypinata.cloud/ipfs/QmeStiUNVMRe4db6qeoEeaXR8CDKxprLUqdW9CoUAxoV54/" +
+        "https://nftstorage.link/ipfs/QmeStiUNVMRe4db6qeoEeaXR8CDKxprLUqdW9CoUAxoV54/" +
         tokenId +
         ".png";
 
@@ -259,7 +259,7 @@ export const BlockchainContextProvider = (props) => {
     const balance = tokenInfo.length;
     for (let a = 0; a < balance; a++) {
       const image =
-        "https://lads.mypinata.cloud/ipfs/QmeStiUNVMRe4db6qeoEeaXR8CDKxprLUqdW9CoUAxoV54/" +
+        "https://nftstorage.link/ipfs/QmeStiUNVMRe4db6qeoEeaXR8CDKxprLUqdW9CoUAxoV54/" +
         tokenInfo[a] +
         ".png";
       tokenIds.push(tokenInfo[a].toString());
